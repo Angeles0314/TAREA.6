@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Imágenes</title>
+
+    <!-- Link para incluir Remix Icon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px; /* Tamaño máximo reducido para la galería */
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .navbar {
+            background-color: #d1006f;
+            padding: 15px;
+            text-align: center;
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 1.5rem; /* Tamaño de texto ajustado */
+        }
+
+        .navbar-bar {
+            background-color: #35061f;
+            border-radius: 10px;
+            padding: 5px; /* Ajusta padding para reducir la altura */
+            margin: 0 auto 15px auto;
+            max-width: 95%; /* Ancho ajustado para que sea angosta */
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-links {
+            display: flex;
+            justify-content: space-around; /* Distribuye las secciones de forma horizontal */
+            padding: 5px 0; /* Reduce padding para disminuir el espacio */
+            color: #ffffff;
+            font-size: 14px;
+            margin-bottom: 5px; /* Espacio reducido entre las palabras y los iconos */
+        }
+
+        .icon-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex; /* Diseño horizontal */
+            justify-content: space-around; /* Espacio alrededor de los iconos */
+            width: 100%;
+            margin-top: 0; /* Ajusta margen superior a 0 para reducir el espacio */
+        }
+
+        .icon {
+            cursor: pointer;
+            font-size: 18px; /* Tamaño del icono ajustado */
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 5px; /* Margen horizontal reducido entre iconos */
+        }
+
+        .icon:hover {
+            color: #e5bfda;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columnas para celular */
+            grid-gap: 5px; /* Espaciado reducido */
+            margin: 10px 0;
+        }
+
+        .gallery img {
+            width: 100%; /* Imágenes ajustadas al contenedor */
+            height: 100px; /* Altura fija para las imágenes */
+            border-radius: 5px; /* Esquinas redondeadas */
+            transition: transform 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1); /* Ligero efecto de escalado */
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 90%;
+            max-width: 300px; /* Tamaño ajustado para móvil */
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: rgb(98, 30, 63);
+            font-size: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover, .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Media Query para dispositivos con ancho menor a 767px */
+        @media (max-width: 767px) {
+            .container {
+                max-width: 360px; /* Reduce el ancho máximo */
+            }
+
+            .navbar h1 {
+                font-size: 1.2rem; /* Reduce el tamaño del título */
+            }
+
+            .navbar-bar {
+                padding: 5px 10px; /* Reduce padding */
+                max-width: 90%; /* Reduce el ancho máximo */
+            }
+
+            .navbar-links {
+                font-size: 12px; /* Tamaño de texto más pequeño */
+                padding: 5px 0;
+            }
+
+            .icon-list {
+                justify-content: space-between; /* Ajusta la distribución de los iconos */
+                margin-top: 5px;
+            }
+
+            .icon {
+                font-size: 16px; /* Reduce el tamaño del icono */
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr); /* 2 columnas para pantallas más pequeñas */
+                grid-gap: 5px;
+            }
+
+            .gallery img {
+                height: 80px; /* Altura más pequeña para las imágenes */
+            }
+
+            .modal-content {
+                max-width: 250px; /* Tamaño reducido del modal en móvil */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="navbar">
+        <h1>Mi Galería</h1> <!-- Se eliminó "Móvil" del título -->
+    </div>
+
+    <div class="navbar-bar">
+        <!-- Secciones (Inicio, Servicio, Contacto) -->
+        <div class="navbar-links">
+            <span>Inicio</span>
+            <span>Servicio</span>
+            <span>Contacto</span>
+        </div>
+
+        <!-- Íconos sociales -->
+        <ul class="icon-list">
+            <li>
+                <a href="https://www.behance.net/catalinaprez15" target="_blank" class="icon">
+                    <i class="ri-behance-fill"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://wa.me/qr/6VG22RRTUJMRP1" target="_blank" class="icon">
+                    <i class="ri-whatsapp-line"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://mail.google.com/mail/u/0/?pli=1#inbox" target="_blank" class="icon">
+                    <i class="ri-mail-line"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.instagram.com/_.grim._.ghost._?igsh=NHN6eWVxMG9sZXFx" target="_blank" class="icon">
+                    <i class="ri-instagram-line"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/Angeles0314/tarea4-portafolioo" target="_blank" class="icon">
+                    <i class="ri-github-fill"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="gallery">
+        <img src="img/pexels-andrejcook-131723.jpg" alt="Imagen 1" id="img1">
+        <img src="img/pexels-aronvisuals-1743165.jpg" alt="Imagen 2" id="img2">
+        <img src="img/pexels-bri-schneiter-28802-346529.jpg" alt="Imagen 3" id="img3">
+        <img src="img/pexels-fotios-photos-1107717.jpg" alt="Imagen 4" id="img4">
+        <img src="img/pexels-fr3nks-356807.jpg" alt="Imagen 5" id="img5">
+        <img src="img/pexels-m-venter-792254-1659438.jpg" alt="Imagen 6" id="img6">
+        <img src="img/pexels-pedro-figueras-202443-681467.jpg" alt="Imagen 7" id="img7">
+        <img src="img/pexels-pixabay-147411.jpg" alt="Imagen 8" id="img8">
+        <img src="img/pexels-pixabay-247599.jpg" alt="Imagen 9" id="img9">
+        <img src="img/pexels-quang-nguyen-vinh-222549-2166711.jpg" alt="Imagen 10" id="img10">
+        <img src="img/pexels-samandgos-709552.jpg" alt="Imagen 11" id="img11">
+        <img src="img/imagen 12.jpg" alt="Imagen 12" id="img12">
+    </div>
+
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="imgModal">
+        <div id="caption"></div>
+    </div>
+</div>
+
+<script>
+    // Script para abrir el modal al hacer clic en una imagen
+    var modal = document.getElementById("myModal");
+    var imgModal = document.getElementById("imgModal");
+    var captionText = document.getElementById("caption");
+
+    var images = document.querySelectorAll('.gallery img');
+    images.forEach(function(image) {
+        image.onclick = function() {
+            modal.style.display = "block";
+            imgModal.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+    });
+
+    var span = document.getElementsByClassName("close")[0];
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Cerrar el modal cuando se hace clic fuera de la imagen
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>
+
+
